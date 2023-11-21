@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option csharp_namespace = "Demo.Academic.Protos";
+
+package courseinfo;
+
+service CourseInfo{
+	rpc GetCourseInfo(CourseRequest) returns (CourseResponse);
+}
+
+message CourseResponse{
+	int32 id = 1;
+	string name = 2;
+	string code = 3;
+	int32 departmentId = 4;
+}
+
+message CourseRequest {
+	int32 id = 1;
+}

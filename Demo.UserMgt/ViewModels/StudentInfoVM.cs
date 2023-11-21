@@ -1,0 +1,11 @@
+﻿namespace Demo.UserMgt.ViewModels
+{
+    public class StudentInfoVM
+    {
+        public int Id { get; set; }
+        public required string Name { get; set; }
+        public required string Email { get; set; }
+        public required int MobileNumber { get; set; }
+        public int DepartmentId { get; set; }
+    }
+}

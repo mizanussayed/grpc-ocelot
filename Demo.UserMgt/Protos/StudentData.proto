@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option csharp_namespace = "Demo.UserMgt.Protos";
+
+package  studentdata;
+
+service StudentData {
+	rpc GetStudentDepartmentWise(StudentRequest) returns (StudentListResponse);
+}
+
+
+message StudentResonse{
+	int32 id = 1;
+	string name = 2;
+	string mobileNumber = 3;
+	int32 departmentId = 4;
+}
+
+message StudentListResponse{
+	repeated StudentResonse studentResonse = 1;
+}
+
+message StudentRequest {
+	int32 departmentId = 1;
+}
+

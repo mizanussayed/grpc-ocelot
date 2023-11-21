@@ -1,0 +1,23 @@
+@Demo.Academic_HostAddress = https://localhost:5011/api
+
+GET {{Demo.Academic_HostAddress}}/faculty
+Accept: application/json
+
+###
+POST {{Demo.Academic_HostAddress}}/faculty
+Content-Type: application/json
+
+{
+   "name": "Faculty of Law"
+}
+###
+put {{Demo.Academic_HostAddress}}/faculty/5
+Content-Type: application/json
+
+{
+   "id": 5,
+   "name": "Faculty of LLB"
+}
+###
+DELETE {{Demo.Academic_HostAddress}}/faculty/5
+###

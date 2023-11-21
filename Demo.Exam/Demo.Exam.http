@@ -1,0 +1,8 @@
+@Demo.Exam_HostAddress = https://localhost:5012/api
+
+GET {{Demo.Exam_HostAddress}}/examsetup/1
+Accept: application/json
+###
+POST {{Demo.Exam_HostAddress}}/examsetup
+
+###

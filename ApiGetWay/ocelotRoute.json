@@ -1,0 +1,73 @@
+{
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/ac/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5011
+        }
+      ]
+    },
+
+    {
+      "UpstreamPathTemplate": "/exm/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5012
+        }
+      ]
+    },
+
+    {
+      "UpstreamPathTemplate": "/user/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5013
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/loadandrate",   
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/loadbalancingratelimiting",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8080
+        },
+        {
+          "Host": "localhost",
+          "Port": 8081
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "2s",
+        "PeriodTimespan": 2,
+        "Limit": 2
+      },
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      }
+    }
+  ],
+
+
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5010"
+  }
+}
