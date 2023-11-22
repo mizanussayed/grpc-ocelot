@@ -3,14 +3,17 @@ using Demo.Academic.Protos;
 using Demo.Exam.Data;
 using Demo.Exam.Entities;
 using Demo.Exam.ViewModels;
-using Grpc.Net.Client;
 using Microsoft.AspNetCore.Mvc;
+using static Demo.Academic.Protos.CourseInfo;
 
 namespace Demo.Exam.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ExamSetupController(IExamSetupRepository Repository, IMapper Mapper) : ControllerBase
+    public class ExamSetupController(
+        IExamSetupRepository Repository,
+        IMapper Mapper,
+        CourseInfoClient Client) : ControllerBase
     {
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -32,9 +35,7 @@ namespace Demo.Exam.Controllers
                 return NotFound();
             }
             var mappedData = Mapper.Map<ExamSetupVM>(result);
-            using var channel = GrpcChannel.ForAddress("https://localhost:5011");
-            var client = new CourseInfo.CourseInfoClient(channel);
-            var reply = await client.GetCourseInfoAsync(
+            var reply = await Client.GetCourseInfoAsync(
                               new CourseRequest { Id = result.CourseId });
             mappedData.Code = reply.Code;
             mappedData.Name = reply.Name;

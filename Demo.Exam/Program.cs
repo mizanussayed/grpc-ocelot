@@ -1,3 +1,4 @@
+using Demo.Academic.Protos;
 using Demo.Exam.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,9 @@ builder.Services.AddTransient<IMarkEntryRepository , MarkEntryRepository>();
 var Configuration = builder.Configuration;
 builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.
+        AddGrpcClient<CourseInfo.CourseInfoClient>(ob => ob.Address = new Uri("https://localhost:5011"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
